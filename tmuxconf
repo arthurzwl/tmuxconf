@@ -1,0 +1,73 @@
+#解除 Ctrl + b
+unbind ^b
+#设置前缀为 Ctrl + a
+set -g prefix ^a
+
+#basic setting
+set -g default-terminal "screen-256color"
+set -g display-time 3000
+set -g escape-time 0
+set -g history-limit 65535
+set -g base-index 1
+setw -g utf8 on
+
+#split window
+unbind '"'
+bind - splitw -v
+unbind %
+bind | splitw -h
+
+#select pane
+bind k selectp -U
+bind j selectp -D
+bind h selectp -L
+bind l selectp -R
+
+#copy-mode 将快捷键设置为vi模式
+setw -g mode-keys vi
+#将r设置为加载配置文件，并显示"reloader!"信息
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+#zoom pane
+#bind ^z run "tmux-zoom"
+
+#resize pane
+bind -r ^k resizep -U 5 # upward (prefix Ctrl+k)
+bind -r ^j resizep -D 5 # downward (prefix Ctrl+j)
+bind -r ^h resizep -L 5 # to the left (prefix Ctrl+h)
+bind -r ^l resizep -R 5 # to the right (prefix Ctrl+l)
+bind -r ^z resizep -Z # 
+
+#misc
+bind e lastp
+bind ^e last
+bind q killp
+bind ^q killw
+
+#panes
+set -g pane-border-bg default
+set -g pane-border-fg colour234
+set -g pane-active-border-bg default
+set -g pane-active-border-fg green
+
+#message
+set -g message-attr bold
+set -g message-bg default
+set -g message-fg colour223
+
+#statusbar
+set -g status-utf8 on
+set -g status-interval 1
+set -g status-keys vi
+set -g status-justify left
+set -g display-time 3000
+set -g status-bg default
+set -g status-fg white
+set-window-option -g window-status-current-attr default
+set-window-option -g window-status-current-fg red
+set-window-option -g window-status-current-bg default
+set -g status-left-length 15
+set -g status-right-length 55
+#set -g status-left "#[fg=white,bg=blue] > #I #W < #[default] |" # 0:bash
+set -g status-left "#[fg=while,bg=default] > #S < #[default] |" #session-name
+set -g status-right "#[fg=red,bright][#[fg=cyan]#H #[fg=red]]#[default] #[fg=yellow,bright]- %Y.%m.%d #[fg=green]%H:%M #[default]#[fg=magenta,bright](load: #(cat /proc/loadavg |cut -d \"\" -f 1,2,3))#[default]"
