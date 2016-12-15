@@ -23,6 +23,8 @@ bind j selectp -D
 bind h selectp -L
 bind l selectp -R
 
+bind c new-window -c "#{pane_current_path}"
+
 #copy-mode 将快捷键设置为vi模式
 setw -g mode-keys vi
 #将r设置为加载配置文件，并显示"reloader!"信息
